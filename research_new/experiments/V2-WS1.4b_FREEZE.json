@@ -1,0 +1,29 @@
+{
+  "config": "configs/yolost_v2_ws1_4b_dfl_seed29_30ep.yaml",
+  "config_sha256": "67d14f430ba6e0e767e47085a42dba65d8228bb2962976bd62f856fb5ed5625e",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "Same gate as V2-WS1.4. A replication that clears it confirms the mechanism; the seed spread is itself the useful output.",
+    "threshold": 91.04
+  },
+  "id": "V2-WS1.4b",
+  "notes": "V2-WS1.4 scored 91.72 final / 91.73 EMA corrected.",
+  "one_variable": "Random seed 17 -> 29. Everything else identical to V2-WS1.4.",
+  "parent": "scratch (same fresh lineage as V2-WS1.4)",
+  "purpose": "Second seed for the promoted distribution box head. WS1 has produced three failed gates and one pass; before anything is built on that pass it needs to be shown it is not seed noise. This also gives the first estimate of run-to-run variation on this lineage, which every gate so far has been set without.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "epochs": 30,
+    "img_size": 224,
+    "lambda_dfl": 1.5,
+    "lr": 0.0001,
+    "reg_max": 16,
+    "seed": 29
+  },
+  "registered_utc": "2026-09-11T12:47:18.900709Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

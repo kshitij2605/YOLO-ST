@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_r1p_288x512_proxy_s17.yaml",
+  "config_sha256": "cb6ae1216fd68a71ddac687faa18b66acaff6dc23ad8190512ce5ac1050a1862",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "AVA-R1P-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Input 224x224 -> 288x512 (patch 0017)",
+  "parent": "AVA-M0b8-s17",
+  "partition": "ava-dev-34videos",
+  "purpose": "Revised plan 10 workstream 2: AVA resolution at proxy scale. STAR gains up to +4.6 mAP from 140x224 to 320x512. Gate +1.5 AVA-dev mAP over AVA-M0b8.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 8,
+    "epochs": 2,
+    "grad_accum": 4,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-16T00:16:06.664788Z",
+  "train_sha256": "a7482e94e886fded5029a5d11512fc84c0ce2ab8af71764c4e0f46b593b4f8a4"
+}

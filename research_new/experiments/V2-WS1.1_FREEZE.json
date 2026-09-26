@@ -1,0 +1,30 @@
+{
+  "backbone_gate": "research_new/experiments/backbone_load_videomae_large.json (PASS, 362 tensors identical, forward delta 0.0)",
+  "config": "configs/yolost_v2_ws1_1_videomae_l_dense_30ep.yaml",
+  "config_sha256": "1b9194e32173878dbca11f5fae93192e42c4a779d2470250eec68c7ca05f7920",
+  "eval_command": "python3 eval_ucf24.py --config configs/yolost_v2_ws1_1_videomae_l_dense_30ep.yaml --checkpoint experiments/v2_ws1_1_videomae_l_dense_30ep/final.pt",
+  "gate": {
+    "metric": "corrected dense frame mAP@0.5 on UCF101-24 split-1 test",
+    "rationale": "YOWOFormer-B parity level. v1 dense owner caps at 89.23 with VideoMAE-Base; reproduced YOWOFormer-L reaches 92.48 with VideoMAE-Large.",
+    "threshold": 91.5
+  },
+  "id": "V2-WS1.1",
+  "model_sha256": "af697778b834a459a4bbc826c1524ef6f5d75d8d9a0bcec3e43667ad70831894",
+  "notes": "backbone_lr_multiplier and configurable EMA added by research_new/patches/0002_backbone_lr_and_ema.py; both default to prior behaviour.",
+  "one_variable": "VideoMAE-Base -> VideoMAE-Large as the semantic backbone, with a backbone LR multiplier so a fresh neck/head can train alongside it",
+  "parent": "scratch (fresh lineage; pretrained VideoMAE-L, frozen native (2+1)D motion from phase3a_150ep, frozen YOLO11-L keyframe)",
+  "purpose": "VideoMAE-Large dense frame owner on UCF101-24. Tube-query decoder off so the dense pathway is measured in isolation.",
+  "recipe": {
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "ema": "decay 0.999 warmup 500",
+    "epochs": 30,
+    "lr": 0.0001,
+    "measured_step_time_1gpu_s": 1.07,
+    "seed": 17,
+    "steps_per_epoch_estimate": 338,
+    "warmup_epochs": 1.0
+  },
+  "registered_utc": "2026-09-09T03:53:29.397854Z",
+  "train_sha256": "790303462928ea6c07903097c5397916bfc132569909f689b11c78831aa42963"
+}

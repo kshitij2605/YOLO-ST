@@ -1,0 +1,32 @@
+{
+  "config": "configs/yolost_v2ho_ho0_s17_30ep.yaml",
+  "config_sha256": "a624a7b2ce1eb7b376e25d91a9464c4f0b569d76b6c198be52186bd8cc108b7d",
+  "gate": "On confirm (g22/g23, HO0-s17 dump): every-frame VOC >= unmodified + 1.0 and annotated-frame VOC >= unmodified - 0.5; the selected setting must also gain >= 0.5 every-frame on tune.",
+  "grid": {
+    "eps": [
+      0.0,
+      0.3,
+      0.6
+    ],
+    "gap": 2,
+    "k": [
+      2,
+      4,
+      8,
+      12,
+      16
+    ],
+    "s_min": [
+      0.05,
+      0.2
+    ]
+  },
+  "id": "V2HO-IG2-s17",
+  "one_variable": "Post-hoc temporal erosion of dense frame detections: per video and class, frames whose best detection scores >= s_min form segments (gaps <= 2 bridged); detections in the outer k frames of a segment are multiplied by eps. Frame metrics only; model unchanged.",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "Confident detections on action-free frames sit mostly within a few frames of annotated actions (tune: 48% within 8 frames). If detected segments overshoot the annotated interval, eroding their ends removes those detections at little cost on annotated frames. IG1 (gating by tube coverage) and E3 (training on action-free clips) failed.",
+  "selection": "On tune (g24/g25, HO0-s17 dump): maximise every-frame VOC among settings whose annotated-frame VOC is >= unmodified - 0.5; ties within 0.05 broken by larger eps, then smaller k, then larger s_min.",
+  "test_use": "If the gate passes, the selected setting is frozen and applied once to the recorded V2-WS2.0 test dump; the eroded detections then define every reported frame-mAP number. If it fails, test is not touched.",
+  "tool": "tools/erode_frame_segments.py",
+  "tool_sha256": "0872b7e10bc7652d1a60c3f3dd95f50507e712674fecfb02c34a29d9191fbacf"
+}

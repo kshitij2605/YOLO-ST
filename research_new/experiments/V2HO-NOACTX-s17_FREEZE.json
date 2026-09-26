@@ -1,0 +1,25 @@
+{
+  "config": "configs/yolost_v2ho_noactx_s17_30ep.yaml",
+  "config_sha256": "98eb8fd692f2cbe8b12d348833914a6d30bf7a3eb1bc5aaf00f83217aed04632",
+  "control_numbers": {
+    "confirm": {
+      "allframe_voc": 91.68,
+      "annotated_voc": 95.45,
+      "video_ap50_snap": 78.53
+    },
+    "tune": {
+      "allframe_voc": 94.46,
+      "annotated_voc": 96.37
+    }
+  },
+  "full_data_change": [
+    "  apt_actor_context: true\n",
+    "  apt_actor_context: false\n"
+  ],
+  "gate": "Expanded selection (2026-09-25, before any every-frame number of these candidates exists): candidates V2HO-KF64-s17, V2HO-MR100-s17, V2HO-TK1-s17, V2HO-NOACTX-s17 and the already-trained V2HO-M2-s17, V2HO-M3-s17, V2HO-M4-s17. Rank by tune every-frame VOC among candidates whose tune annotated-frame VOC is >= control - 0.5; only the top-ranked one is gated on confirm. Gate against V2HO-HO0-s17 in the same pipeline: (a) every-frame VOC >= control + 1.0 on confirm and >= control + 0.5 on tune; (b) annotated-frame VOC >= control - 0.5 on both; (c) confirm video AP50 with the frozen linker and snap >= control - 2.0.",
+  "id": "V2HO-NOACTX-s17",
+  "one_variable": "model.apt_actor_context true -> false: the two-layer temporal attention over one saliency-pooled actor token per frame, which mixes evidence across the whole clip, is removed; everything else is the V2HO-HO0-s17 recipe, seed 17, 30 epochs",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "Detections just outside annotated actions come from temporally coarse features. KF64 and MR100 add sharper evidence; TK1 and NOACTX remove temporal mixing. Low prior odds, stated before launch.",
+  "test_use": "If the selected candidate passes, its full-data model is then trained from V2-WS2.0 with the same one-variable change, evaluated on split-1 test once under the frozen protocol, and replaces V2-WS2.0 whatever its test result. Otherwise nothing is evaluated on test."
+}

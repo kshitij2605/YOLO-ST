@@ -1,0 +1,146 @@
+# V2HO-BN32w4-s17 (confirm evaluation): control with unannotated frames within 32 frames of an annotated frame
+# up-weighted 4x in the dense loss (patch 0031). One variable.
+# V2HO-HO0-s17: WS2.0 recipe on v2ho train (minus g22-g25), eval g24/g25.
+# Derived from configs/yolost_v2_ws2_0_tubequeries_30ep.yaml by tools/make_w1_configs.py
+
+data:
+  annot_file: ./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-confirm-g22g23.pkl
+  clip_length: 64
+  dataset: ucf101-24
+  filter_empty_clips: true
+  boundary_negative_window: 32
+  boundary_negative_weight: 4.0
+  img_size: 224
+  num_workers: 8
+  root: ./data/ucf24/UCF101_v2/rgb-images
+  stride: 1
+eval:
+  conf_thresh: 0.005
+  nms_iou_thresh: 0.5
+loss:
+  lambda_bnd: 0.0
+  lambda_box: 7.5
+  lambda_cls: 0.5
+  lambda_dfl: 1.5
+  lambda_memory: 0.05
+  lambda_obj: 1.5
+  lambda_query_boundary: 0.25
+  lambda_query_box: 5.0
+  lambda_query_cls: 1.0
+  lambda_query_coverage: 1.0
+  lambda_query_end: 0.5
+  lambda_query_fragmentation: 0.5
+  lambda_query_giou: 2.0
+  lambda_query_interval_iou: 2.0
+  lambda_query_start: 0.5
+  lambda_query_visibility: 1.0
+  query_cost_box: 5.0
+  query_cost_cls: 2.0
+  query_cost_coverage: 1.0
+  query_cost_fragmentation: 0.5
+  query_cost_giou: 2.0
+  query_cost_interval: 2.0
+  query_cost_visibility: 1.0
+model:
+  apt_actor_context: true
+  apt_actor_context_depth: 2
+  apt_actor_context_dim: 128
+  apt_actor_context_dropout: 0.05
+  apt_actor_context_heads: 4
+  apt_actor_context_slots: 1
+  apt_adapter_depth: 1
+  apt_adapter_dropout: 0.05
+  apt_adapter_kernel: 3
+  apt_adapter_temporal_kernel: 3
+  apt_class_context: true
+  apt_class_context_dim: 128
+  apt_class_context_dropout: 0.05
+  apt_context_dim: 128
+  apt_context_dropout: 0.05
+  apt_context_gate: true
+  apt_cross_clip_memory: true
+  apt_cross_clip_memory_bidirectional: true
+  apt_cross_clip_memory_chunk: 8
+  apt_cross_clip_memory_dim: 128
+  apt_cross_clip_memory_dropout: 0.05
+  apt_pyramid_adapter: true
+  apt_tube_queries: true
+  apt_tube_query_actor_aligned: false
+  apt_tube_query_count: 8
+  apt_tube_query_depth: 6
+  apt_tube_query_dim: 256
+  apt_tube_query_dropout: 0.1
+  apt_tube_query_factorized: true
+  apt_tube_query_frames: 32
+  apt_tube_query_heads: 8
+  apt_tube_query_instances_per_actor: 2
+  apt_tube_query_interval_pyramid: true
+  apt_tube_query_intervals: true
+  apt_tube_query_memory_grid: 14
+  apt_tube_query_shared_grad_scales:
+  - 0.0
+  - 0.2
+  - 0.0
+  apt_tube_query_task_adapter_ratio: 0.25
+  apt_tube_query_task_adapter_scales:
+  - true
+  - false
+  - true
+  apt_tube_query_task_adapter_temporal_kernel: 3
+  apt_tube_query_task_adapters: true
+  backbone_frame_sampling: uniform
+  backbone_frames: 32
+  dtype: float32
+  freeze_backbone: false
+  keyframe_frames: 16
+  keyframe_freeze: true
+  keyframe_micro_batch: 8
+  keyframe_pretrained_path: ./pretrained/yolo11l.pt
+  keyframe_pyramid: true
+  keyframe_scales:
+  - true
+  - true
+  - true
+  keyframe_version: l
+  model_id: MCG-NJU/videomae-large-finetuned-kinetics
+  native_motion_actor_floor: 0.1
+  native_motion_actor_local: true
+  native_motion_channel_ratio: 0.25
+  native_motion_freeze: true
+  native_motion_init: ./experiments/phase3a_150ep/final.pt
+  native_motion_pyramid: true
+  num_classes: 24
+  reg_max: 16
+  temporal_adapter: true
+  temporal_adapter_depth: 2
+  temporal_adapter_dropout: 0.05
+  temporal_adapter_expansion: 2
+  temporal_adapter_kernel: 5
+  type: videomae
+  unfreeze_last_n_blocks: 8
+output:
+  exp_dir: ./experiments/v2ho_bn32w4_s17_30ep
+  save_interval: 5
+train:
+  amp_dtype: bfloat16
+  backbone_lr_multiplier: 0.1
+  backward_loss_divisor: 1
+  batch_size: 16
+  clip_grad_norm: 1.0
+  ema: true
+  ema_decay: 0.999
+  ema_warmup: 500
+  epochs: 30
+  grad_accum: 2
+  keyframe_lr_multiplier: 1.0
+  lr: 0.0001
+  mixed_precision: true
+  motion_fusion_lr_multiplier: 1.0
+  nonfinite_abort_steps: 25
+  optimizer: adamw
+  scheduler: cosine
+  seed: 17
+  tube_query_lr_multiplier: 1.0
+  tube_task_adapter_lr_multiplier: 1.0
+  warmup_epochs: 1.0
+  weight_decay: 0.05

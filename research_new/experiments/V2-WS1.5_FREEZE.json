@@ -1,0 +1,29 @@
+{
+  "config": "configs/yolost_v2_ws1_5_unfreeze16_30ep.yaml",
+  "config_sha256": "404f33761fae164d8eb890bacea21435383a997c81e5ae7275db47402e52cba3",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.4 two-seed mean is 91.65 corrected with a measured seed spread of 0.17, so +0.5 is about three times run-to-run variation.",
+    "threshold": 92.15
+  },
+  "id": "V2-WS1.5",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "notes": "One of four experiments run concurrently, one per GPU. batch 16 with accumulation 2 keeps the effective batch at 32 so results stay comparable with the four-rank baseline.",
+  "one_variable": "unfreeze_last_n_blocks 8 -> 16 (120 -> 240 trainable backbone tensors).",
+  "parent": "scratch (same fresh lineage as V2-WS1.4)",
+  "purpose": "Unfreeze 16 of 24 VideoMAE-Large blocks instead of 8. The backbone swap was the only WS1 change besides the box head that moved anything, so giving it more capacity to adapt is the direct follow-up.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "effective_batch": 32,
+    "epochs": 30,
+    "grad_accum": 2,
+    "img_size": 224,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-12T01:39:19.428790Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

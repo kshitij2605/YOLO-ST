@@ -1,0 +1,30 @@
+{
+  "config": "configs/yolost_v2_ws1_3_res288_30ep.yaml",
+  "config_sha256": "b3910b716226d525e0db38329418c4f37ea17eb9171d4fb789ddf3d1b2f1a282",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.1b scored 90.54 corrected; +0.5 is the smallest change worth carrying forward.",
+    "threshold": 91.04
+  },
+  "id": "V2-WS1.3",
+  "model_sha256": "7061be05ba9f3f5c4b8d92d145033a54337b27c573f7b760ae0b46f52d991dce",
+  "notes": "v1 closed 320-pixel training (CD-03), but that was a low-rate continuation from a 224-trained VideoMAE-Base parent, which is a distribution shock rather than a verdict on resolution. This is a fresh lineage trained at 288 from the start. verified by a 3-step smoke.",
+  "one_variable": "data.img_size 224 -> 288. Backbone, learning rate, schedule, batch, seed, AMP dtype and position-embedding mode unchanged from V2-WS1.1b.",
+  "parent": "scratch (same fresh lineage as V2-WS1.1b)",
+  "purpose": "Input resolution 224 to 288. Resolution is the single best-evidenced recipe lever in the STAD literature: STAR measured 140x224 to 320x512 as +4.6 AVA mAP. The token grid goes from 14x14 to 18x18, so the position table is now resampled spatially as well as temporally, using interpolation, which V2-WS1.2 established is the right mode for a pretrained encoder.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "ema": "decay 0.999 warmup 500",
+    "epochs": 30,
+    "img_size": 288,
+    "lr": 0.0001,
+    "seed": 17,
+    "warmup_epochs": 1.0
+  },
+  "registered_utc": "2026-09-10T04:51:14.847146Z",
+  "train_sha256": "315da4c52143b0d1d52cda436c30686648ce05f2d0cd96778b7a1b83014df62e"
+}

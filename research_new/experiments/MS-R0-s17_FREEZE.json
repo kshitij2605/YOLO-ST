@@ -1,0 +1,22 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_r0_224_s17_6ep.yaml",
+  "config_sha256": "4f77059d897a08f8c7b8ba7ea56232143f7f3d8ef1cf041f5727c9ee76c3eff5",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-R0-s17",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "MultiSports baseline MS-R0: v2 HO0 architecture, 224x224 squash, 64-frame clips, K400 init, 6 epochs on MultiSports train minus 10% dev",
+  "parent": "V2-WS2.0",
+  "partition": "multisports-dev-168videos",
+  "purpose": "Plan 08 section 6.4: first v2 MultiSports result; control for MS-R2 (288x512), MS-I1 (UCF init) and the MultiSports linker recalibration.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 6,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-14T13:15:43.798194Z",
+  "train_sha256": "3e5bb81eb4893745bc72a92cb2402d28fc6008a9b767e70fedcfa294c7f29b30"
+}

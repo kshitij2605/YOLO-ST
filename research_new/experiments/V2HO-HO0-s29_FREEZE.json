@@ -1,0 +1,22 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_ho0_s29_30ep.yaml",
+  "config_sha256": "421c8d094550c21033cbe4ffdda3f0209601b11afcf6838765a4f49f04d1db63",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "V2HO-HO0-s29",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "one_variable": "Seed 17 -> 29",
+  "parent": "V2HO-HO0-s17",
+  "partition": "ucf-v2ho-g24g25 (tune); confirm on ucf-v2ho-g22g23",
+  "purpose": "Seed replicate of HO0; sigma_HO sets every later gate.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 29
+  },
+  "registered_utc": "2026-09-13T08:21:50.691015Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

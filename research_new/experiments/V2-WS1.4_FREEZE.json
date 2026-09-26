@@ -1,0 +1,32 @@
+{
+  "config": "configs/yolost_v2_ws1_4_dfl_regmax16_30ep.yaml",
+  "config_sha256": "d257f3fb3016c1ba11a73e69377a82ec0b5b2906f49b095ad2d8b9cd4dfb1225",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.1b scored 90.54 corrected; +0.5 is the smallest change worth carrying forward.",
+    "threshold": 91.04
+  },
+  "id": "V2-WS1.4",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "notes": "Implemented in yolost/dfl.py with patches 0006 and 0007. reg_max 0 keeps the original head bit-identical and a test asserts the distribution term is exactly zero there. 24 tests cover the arithmetic, the wiring, and that the training decode and the evaluator decode produce identical boxes.",
+  "one_variable": "Dense box head parameterisation: direct centre/size regression -> distribution over LTRB distances, reg_max 16, lambda_dfl 1.5. Backbone, resolution, learning rate, schedule, batch, seed and AMP dtype unchanged from V2-WS1.1b.",
+  "parent": "scratch (same fresh lineage as V2-WS1.1b)",
+  "purpose": "Replace direct box regression with distribution regression in the dense head. Each side of the box becomes a categorical distribution over 17 discrete distances from the anchor, decoded by expectation, instead of a sigmoid centre offset and an exponentiated size. This is the parameterisation YOLOv8, YOLO11 and YOWOFormer use; YOWOFormer reaches 92.48 frame mAP with the same VideoMAE-Large weights this lineage tops out at 90.54 with. D-FINE reports the family as worth up to +5.3 AP across DETRs, concentrated at high IoU.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "ema": "decay 0.999 warmup 500",
+    "epochs": 30,
+    "img_size": 224,
+    "lambda_dfl": 1.5,
+    "lr": 0.0001,
+    "reg_max": 16,
+    "seed": 17,
+    "warmup_epochs": 1.0
+  },
+  "registered_utc": "2026-09-11T05:32:33.669407Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

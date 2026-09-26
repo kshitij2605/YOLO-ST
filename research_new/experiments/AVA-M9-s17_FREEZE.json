@@ -1,0 +1,25 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_m9_nokeymask_proxy_s17.yaml",
+  "config_sha256": "498e07c95e7cf4470bac0665fefc3f171d53b9f965c827c20a14bed349a4161f",
+  "config_sha256_initial": "c5344c1a8396fc0f48d8a76eae70bfba3a536e6f8645426c0ce23dc1245f8ff7",
+  "gate": "plan 08 section 2.2",
+  "id": "AVA-M9-s17",
+  "loader_change": "data.num_workers 8 -> 3 before any usable training (memory only)",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "Keyframe-only supervision on -> off (unlabelled frames treated as background)",
+  "parent": "AVA-M0-s17",
+  "partition": "ava-dev-34videos",
+  "purpose": "Supplement ablation documenting the supervised_frames fix.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 2,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-13T11:12:23.108616Z",
+  "train_sha256": "b3d1ae4f818c89e9a121e7492298dfc8c0c5ac94e39e11af0af896d8ddfd9937"
+}

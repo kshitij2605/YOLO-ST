@@ -1,0 +1,29 @@
+{
+  "config": "configs/yolost_v2_ws1_6_regmax24_30ep.yaml",
+  "config_sha256": "53e94bca42edadb203553436d6a1b8f891e36e27e11605995ac17fb5f9643239",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.4 two-seed mean is 91.65 corrected with a measured seed spread of 0.17, so +0.5 is about three times run-to-run variation.",
+    "threshold": 92.15
+  },
+  "id": "V2-WS1.6",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "notes": "One of four experiments run concurrently, one per GPU. batch 16 with accumulation 2 keeps the effective batch at 32 so results stay comparable with the four-rank baseline.",
+  "one_variable": "reg_max 16 -> 24 (68 -> 100 regression channels).",
+  "parent": "scratch (same fresh lineage as V2-WS1.4)",
+  "purpose": "reg_max 24 instead of 16. The distribution head gave +1.19; this asks whether the box distribution is resolution-limited, i.e. whether 17 bins per side is too coarse for the largest actor boxes.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "effective_batch": 32,
+    "epochs": 30,
+    "grad_accum": 2,
+    "img_size": 224,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-12T01:39:19.473208Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

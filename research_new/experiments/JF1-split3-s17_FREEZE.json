@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/dev_splits/split3/jhmdb_dev_GT.pkl",
+  "config": "configs/yolost_jhmdb_jf1_frozen_split3_s17_40ep.yaml",
+  "config_sha256": "3d6677ce94e4f59431c709ddbecae2b47b094de4b87d86d9d70e87ab608d9893",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "JF1-split3-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "VideoMAE unfreeze_last_n_blocks 8 -> 0 (fully frozen)",
+  "parent": "J0-split3-s17",
+  "partition": "jhmdb-dev-split3",
+  "purpose": "Plan 08 JHMDB round after W2; see configs header.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 40,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T02:51:17.436416Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

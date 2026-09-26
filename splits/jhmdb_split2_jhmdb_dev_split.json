@@ -1,0 +1,120 @@
+{
+  "dataset": "jhmdb",
+  "derived_annotation": "data/ucf24/JHMDB/dev_splits/split2/jhmdb_dev_GT.pkl",
+  "derived_sha256": "45b7ac314696f74f5f46efef0a5bcebd9f26a37f3e7a767c822aadd94abebb83",
+  "fraction": 0.15,
+  "num_dev_videos": 97,
+  "num_source_train_videos": 658,
+  "num_train_videos": 561,
+  "per_class": {
+    "0": {
+      "dev": 4,
+      "total": 29,
+      "train": 25
+    },
+    "1": {
+      "dev": 5,
+      "total": 34,
+      "train": 29
+    },
+    "10": {
+      "dev": 4,
+      "total": 30,
+      "train": 26
+    },
+    "11": {
+      "dev": 4,
+      "total": 29,
+      "train": 25
+    },
+    "12": {
+      "dev": 4,
+      "total": 28,
+      "train": 24
+    },
+    "13": {
+      "dev": 6,
+      "total": 38,
+      "train": 32
+    },
+    "14": {
+      "dev": 6,
+      "total": 40,
+      "train": 34
+    },
+    "15": {
+      "dev": 4,
+      "total": 27,
+      "train": 23
+    },
+    "16": {
+      "dev": 4,
+      "total": 25,
+      "train": 21
+    },
+    "17": {
+      "dev": 6,
+      "total": 38,
+      "train": 32
+    },
+    "18": {
+      "dev": 5,
+      "total": 33,
+      "train": 28
+    },
+    "19": {
+      "dev": 4,
+      "total": 29,
+      "train": 25
+    },
+    "2": {
+      "dev": 5,
+      "total": 31,
+      "train": 26
+    },
+    "20": {
+      "dev": 4,
+      "total": 30,
+      "train": 26
+    },
+    "3": {
+      "dev": 4,
+      "total": 28,
+      "train": 24
+    },
+    "4": {
+      "dev": 4,
+      "total": 30,
+      "train": 26
+    },
+    "5": {
+      "dev": 4,
+      "total": 29,
+      "train": 25
+    },
+    "6": {
+      "dev": 4,
+      "total": 24,
+      "train": 20
+    },
+    "7": {
+      "dev": 4,
+      "total": 28,
+      "train": 24
+    },
+    "8": {
+      "dev": 6,
+      "total": 39,
+      "train": 33
+    },
+    "9": {
+      "dev": 6,
+      "total": 39,
+      "train": 33
+    }
+  },
+  "seed": "yolost-v2-dev-split-v1",
+  "source_annotation": "data/ucf24/JHMDB/JHMDB-GT.pkl",
+  "source_sha256": "1ad9da71ae8867ba20d9f3897a57fe74841edceee2ae095fe831e5c93e4705d2",
+  "split_index": 1
+}

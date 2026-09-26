@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/JHMDB-GT.pkl",
+  "config": "configs/yolost_jhmdb_jr288_split1_s17_40ep.yaml",
+  "config_sha256": "44c075060e42b153f962da468ce54a20d0e8621b8caaacb76fa246b192124f70",
+  "gate": "plan 08 section 2.2",
+  "id": "JR288-split1-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "data.img_size 224 -> 288 (batch 8 x grad_accum 4 keeps the effective batch at 32; JFULL used 16 x 2); clip 40, 40 epochs, K400 init and frame weighting none all unchanged",
+  "parent": "JFULL-split1-s17",
+  "partition": "jhmdb-test-split1",
+  "purpose": "JHMDB three-split means (frame 91.36, AP20 91.81, AP50 90.55) trail STAR/CSN-152 (93.5/96.3/95.4), and Finding 56 ruled out UCF init and a frozen backbone. Input resolution is the one lever never varied on JHMDB: every run so far squashes 320x240 to 224.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 8,
+    "ema_warmup": 100,
+    "epochs": 40,
+    "grad_accum": 4,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-16T11:16:57.662524Z",
+  "train_sha256": "a7482e94e886fded5029a5d11512fc84c0ce2ab8af71764c4e0f46b593b4f8a4"
+}

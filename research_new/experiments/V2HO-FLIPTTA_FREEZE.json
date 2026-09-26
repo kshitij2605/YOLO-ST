@@ -1,0 +1,14 @@
+{
+  "config": "configs/yolost_v2_ws2_0_tubequeries_30ep.yaml",
+  "config_sha256": "fcc80c3248fa1c1512e5edf42d93c695845246e7f32eb367ada573aeccf58404",
+  "gate": "Held-out, on V2HO-NOACTX-s17 and V2HO-TK1-s17 (the first held-out models to finish), each against its own single-pass numbers from the same evaluation. PASS if on confirm for both models either (a) annotated-frame VOC gains >= +0.10 or (b) video AP50:95 with the frozen snap gains >= +0.30; for the criterion that passes, tune does not drop for either model; and on confirm neither model loses more than 0.20 in every-frame VOC, video AP20 or video AP50. V2HO-KF64-s17 and V2HO-HO0GC-s17 are reported when available but do not decide.",
+  "id": "V2HO-FLIPTTA",
+  "one_variable": "inference only, flip test-time augmentation: every video is evaluated a second time with --hflip (patch 0032: clips flipped horizontally, every box mapped back) and the two views are fused by tools/fuse_flip_views.py with settings fixed now (scores averaged over the two views, a missing view counting 0; matched boxes score-weighted; frame IoU 0.55, tube overlap 0.5, frame NMS 0.5). Everything else is the frozen protocol (hann_peak_norm, candidate filter 8, frozen linker, frozen snap).",
+  "parent": "V2-WS2.0",
+  "purpose": "Inference-only attempt at the metrics within reach of the published best on UCF101-24: annotated-frame VOC (93.21 against YOWOFormer-L 93.35) and video AP50:95 (34.97 against STAR-L 35.8). Horizontal flips are a training augmentation, so the two views should agree; averaging should sharpen boxes and demote detections only one view makes.",
+  "test_use": "Only on a pass: V2-WS2.0 is evaluated on split-1 test once with flip TTA and reported as a separate '+ flip TTA' row; the single-pass numbers stay the headline. The single-pass V2-WS2.0 test run made for the fusion reproduces the reported numbers and is recorded as a reproduction.",
+  "tools": {
+    "eval_tube_queries.py": "4c6dfda9d73364eeeafa15e7b52ef20d63a7a016289daf2511c5bce1e846b598",
+    "tools/fuse_flip_views.py": "ea23c086431c956e4a707acb26a892fdb9892c61e3c8e84f5a7e8f0fcb5866c8"
+  }
+}

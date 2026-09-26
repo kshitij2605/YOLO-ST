@@ -1,0 +1,155 @@
+{
+  "name": "v2ho UCF101-24 video-mAP linker protocol (plan 08 B0)",
+  "frozen_utc": "2026-09-14T05:02:28.898478Z",
+  "linker": {
+    "moc_link_iou": 0.45,
+    "moc_tubelet_nms": 0.6,
+    "moc_top_k": 10,
+    "min_length": 16,
+    "moc_split_gap": 2
+  },
+  "evaluation_fixed": {
+    "moc_tube_nms": 0.3,
+    "note": "tube NMS belongs to the official MOC/ACT video-mAP evaluation and is never tuned"
+  },
+  "previous_defaults": {
+    "moc_link_iou": 0.5,
+    "moc_tubelet_nms": 0.6,
+    "moc_top_k": 10,
+    "min_length": 8,
+    "moc_split_gap": -1
+  },
+  "selection": {
+    "tuned_on": "ucf-v2ho-g24g25 (V2HO-HO0-s17 EMA tube cache)",
+    "confirmed_on": "ucf-v2ho-g22g23 (HO0-s17) and both partitions of V2HO-HO0-s29",
+    "rule": "tune rank by AP50 then AP50:95; adopt the first whose confirm AP50 >= default + 0.5 with AP20 and AP50:95 not below default",
+    "sweeps": [
+      "research_new/experiments/B0_LINKER_SWEEP (stage 1, tube NMS varied, winner discarded)",
+      "research_new/experiments/B0_LINKER_SWEEP_STAGE2 (tube NMS fixed at 0.3)"
+    ]
+  },
+  "evidence_ap20_ap50_strict": {
+    "HO0-s17 tune": {
+      "default": [
+        91.73,
+        74.64,
+        41.31
+      ],
+      "frozen": [
+        93.75,
+        80.21,
+        43.2
+      ]
+    },
+    "HO0-s17 confirm": {
+      "default": [
+        87.8,
+        74.79,
+        41.01
+      ],
+      "frozen": [
+        89.6,
+        77.29,
+        41.51
+      ]
+    },
+    "HO0-s29 tune": {
+      "default": [
+        89.91,
+        73.15,
+        40.59
+      ],
+      "frozen": [
+        90.99,
+        77.81,
+        41.68
+      ]
+    },
+    "HO0-s29 confirm": {
+      "default": [
+        88.26,
+        73.95,
+        40.68
+      ],
+      "frozen": [
+        88.36,
+        75.61,
+        41.35
+      ]
+    }
+  },
+  "code_sha256": {
+    "eval_tube_queries.py": "67399a3682ba54c92eacc87fc616c04661f6f603dde1a76b8c4c3ffc22e14e3a",
+    "eval_cached_tube_protocol.py": "b00c9992f0cda9a9d8207de3bc8d0f1d6cb975d50da9d5b771aacf276289e1bd",
+    "video_map_protocol.py": "d37d846d68c99980f58de7685497de9d8c6b46fa7415c91c3c166b0ae6d92c2d"
+  },
+  "usage": "pass --moc_link_iou 0.45 --moc_tubelet_nms 0.6 --moc_top_k 10 --min_length 16 --moc_split_gap 2 --moc_tube_nms 0.3 to eval_tube_queries.py / eval_cached_tube_protocol.py for every v2 UCF video metric from now on, including final split-1 test evaluations",
+  "frame_clip_weighting": {
+    "frozen_utc": "2026-09-14T13:11:10.751293Z",
+    "mode": "hann_peak_norm",
+    "usage": "eval_dense_frame.py --clip-weighting hann_peak_norm; eval_tube_queries.py --clip_weighting hann_peak_norm",
+    "selection": "B-F2: tune-selected on V2HO-HO0-s17 g24/g25 among hann, hann_coverage_norm, hann_peak_norm, none; confirmed on g22/g23 and on both partitions of V2HO-HO0-s29",
+    "evidence_corrected_frame": {
+      "HO0-s17 tune": {
+        "hann": 95.7,
+        "hann_coverage_norm": 95.84,
+        "hann_peak_norm": 96.38,
+        "none": 96.19
+      },
+      "HO0-s17 confirm": {
+        "hann": 94.09,
+        "hann_coverage_norm": 94.73,
+        "hann_peak_norm": 95.45,
+        "none": 95.46
+      },
+      "HO0-s29 tune": {
+        "hann": 94.51,
+        "hann_peak_norm": 95.31,
+        "none": 95.2
+      },
+      "HO0-s29 confirm": {
+        "hann": 94.06,
+        "hann_peak_norm": 95.38,
+        "none": 95.39
+      }
+    },
+    "rejected": {
+      "B1 inference clip step 16": "confirm video metrics below step 32 even after re-tuning the linker"
+    }
+  },
+  "geometry_snap_b2": {
+    "frozen_utc": "2026-09-16T13:00:00Z",
+    "tool": "tools/snap_tubes_to_dense_geometry.py",
+    "params": {
+      "match_iou": 0.3,
+      "box_blend": 0.75,
+      "score_blend": 0.0,
+      "smooth_radius": 2
+    },
+    "usage": "after MOC linking with the frozen linker, blend each tube box 75 percent toward the highest-IoU same-class dense detection from the model own dense head, then temporally smooth with radius 2",
+    "selection": "tune-selected on V2HO-HO0-s17 g24/g25 over match_iou {0.3,0.5} x box_blend {0,0.25,0.5,0.75,1.0} x smooth {0,1,2}",
+    "tune": {
+      "ap20": 93.72,
+      "ap50": 82.05,
+      "strict": 45.76,
+      "control": {
+        "ap20": 93.75,
+        "ap50": 80.21,
+        "strict": 43.2
+      }
+    },
+    "confirm": {
+      "ap20": 89.63,
+      "ap50": 78.53,
+      "strict": 43.89,
+      "control": {
+        "ap20": 89.6,
+        "ap50": 77.29,
+        "strict": 41.51
+      }
+    },
+    "gate": "confirm AP50 >= control + 0.5 with AP20 and AP50:95 not below control; met with +1.24 / +0.03 / +2.38",
+    "parity": "box_blend 0.0 reproduces the frozen-B0 control exactly on both partitions",
+    "not_adopted": "smooth_radius 1 scored 44.15 strict on confirm but selection is on tune only"
+  }
+}

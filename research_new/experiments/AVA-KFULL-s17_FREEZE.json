@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_kfull_s17_6ep.yaml",
+  "config_sha256": "69f0f3ad2b4abe99e8051ffcf2ce946b7f1d988fa45a19fc76545b5508fa7419",
+  "gate": "plan 08 section 2.2",
+  "id": "AVA-KFULL-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Training data: 158k AVA dev-train keyframes -> the same plus all extracted AVA-Kinetics keyframes (~138k), 6 epochs unchanged",
+  "parent": "AVA-F0-s17",
+  "partition": "ava-dev-34videos",
+  "purpose": "Revised plan 10 workstream 2 at full scale: the proxy version gained +4.18 AVA-dev mAP (22.37 vs 18.19). This is the AVA contender against STAR/L 42.5.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 6,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-16T20:07:43.603834Z",
+  "train_sha256": "f13f28b98cfa25fcbf2a83a64018908eaa8b3a122fef91966e96f180dcadbf5c"
+}

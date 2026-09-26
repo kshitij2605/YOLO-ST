@@ -1,0 +1,22 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_a1a_kftrain_lr01_s17_30ep.yaml",
+  "config_sha256": "567098b40a45052ee7ab5732c0da6063b7476b9d201ea04434d481b00a83014a",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "V2HO-A1a-s17",
+  "model_sha256": "e2895eced7f9001d13741cc0c7f97b948a2e3039472a5b2c0f49d1d4af32f0d3",
+  "one_variable": "Keyframe YOLO11-L stream frozen -> trainable (LR multiplier 0.1, BatchNorm in eval, activation checkpointing for memory only)",
+  "parent": "V2HO-HO0-s17",
+  "partition": "ucf-v2ho-g24g25 (tune); confirm on ucf-v2ho-g22g23",
+  "purpose": "Plan 08 axis A1a: tests whether the trainable 2D keyframe detector behind YOWOFormer-L 92.48 closes the frame gap.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-13T08:49:36.635364Z",
+  "train_sha256": "9dd5ee699fb3ab6bfe7dfb1637129c1cc675408d76d3ddee3c8d10e6db58a77f"
+}

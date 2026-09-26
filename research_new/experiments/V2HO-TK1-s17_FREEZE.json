@@ -1,0 +1,25 @@
+{
+  "config": "configs/yolost_v2ho_tk1_s17_30ep.yaml",
+  "config_sha256": "6718077185db9a9517f6ed4e1ea120c888a3f902f13f14cf61ea480c898f1186",
+  "control_numbers": {
+    "confirm": {
+      "allframe_voc": 91.68,
+      "annotated_voc": 95.45,
+      "video_ap50_snap": 78.53
+    },
+    "tune": {
+      "allframe_voc": 94.46,
+      "annotated_voc": 96.37
+    }
+  },
+  "full_data_change": [
+    "  temporal_adapter_kernel: 5\n",
+    "  temporal_adapter_kernel: 1\n"
+  ],
+  "gate": "Expanded selection (2026-09-25, before any every-frame number of these candidates exists): candidates V2HO-KF64-s17, V2HO-MR100-s17, V2HO-TK1-s17, V2HO-NOACTX-s17 and the already-trained V2HO-M2-s17, V2HO-M3-s17, V2HO-M4-s17. Rank by tune every-frame VOC among candidates whose tune annotated-frame VOC is >= control - 0.5; only the top-ranked one is gated on confirm. Gate against V2HO-HO0-s17 in the same pipeline: (a) every-frame VOC >= control + 1.0 on confirm and >= control + 0.5 on tune; (b) annotated-frame VOC >= control - 0.5 on both; (c) confirm video AP50 with the frozen linker and snap >= control - 2.0.",
+  "id": "V2HO-TK1-s17",
+  "one_variable": "model.temporal_adapter_kernel 5 -> 1: the two residual temporal adapters on the VideoMAE tokens keep their channel MLP but no longer mix over time (kernel 5 spans about +-8 frames); everything else is the V2HO-HO0-s17 recipe, seed 17, 30 epochs",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "Detections just outside annotated actions come from temporally coarse features. KF64 and MR100 add sharper evidence; TK1 and NOACTX remove temporal mixing. Low prior odds, stated before launch.",
+  "test_use": "If the selected candidate passes, its full-data model is then trained from V2-WS2.0 with the same one-variable change, evaluated on split-1 test once under the frozen protocol, and replaces V2-WS2.0 whatever its test result. Otherwise nothing is evaluated on test."
+}

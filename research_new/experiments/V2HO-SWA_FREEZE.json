@@ -1,0 +1,13 @@
+{
+  "config": "configs/yolost_v2_ws2_0_tubequeries_30ep.yaml",
+  "config_sha256": "fcc80c3248fa1c1512e5edf42d93c695845246e7f32eb367ada573aeccf58404",
+  "gate": "Held-out, on V2HO-KF64-s17, V2HO-TK1-s17 and V2HO-NOACTX-s17 (averaged vs their own ema_final, same scorer). PASS if on confirm annotated-frame VOC gains >= +0.10 on average and >= 0 for each model, tune annotated gains >= 0 on average, confirm every-frame VOC gains >= 0 on average, and confirm video AP20 and AP50 (frozen snap) lose no more than 0.5 on average. V2HO-HO0GC-s17 is reported, not deciding.",
+  "id": "V2HO-SWA",
+  "one_variable": "weights, no training: the model is the uniform average of the last two saved EMA snapshots of its run (ema_epoch_24.pt and ema_final.pt, i.e. epochs 24 and 29; BatchNorm counters from the final one). Evaluation is the frozen single-pass protocol.",
+  "parent": "V2-WS2.0",
+  "purpose": "A single-model, single-pass change that could lift annotated-frame VOC past YOWOFormer-L (93.21 against 93.35) without the caveats of test-time augmentation or ensembles.",
+  "test_use": "Only on a pass: V2-WS2.0 averaged the same way (its ema_epoch_24.pt and ema_final.pt) is evaluated on split-1 test once and becomes the paper's single-model result, replacing V2-WS2.0 whatever its test result.",
+  "tools": {
+    "tools/average_checkpoints.py": "3748aace4451141299ec9feaa9aec009b7462888a13192e9b9024d641f22cf6b"
+  }
+}

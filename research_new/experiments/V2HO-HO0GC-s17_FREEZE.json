@@ -1,0 +1,10 @@
+{
+  "config": "configs/yolost_v2ho_ho0gc_s17_30ep.yaml",
+  "config_sha256": "71487513e4f5b1d9db4bdb7dd5d78b41eaa56dc742415cec56d28fa918658b30",
+  "gate": "No gate (a control). Reported against the recorded V2HO-HO0-s17 numbers: tune every-frame VOC 94.46, annotated 96.37; confirm every-frame 91.68, annotated 95.45, video AP50 (snap) 78.53.",
+  "id": "V2HO-HO0GC-s17",
+  "one_variable": "none: the V2HO-HO0-s17 recipe (seed 17, 30 epochs) with backbone_gradient_checkpointing and class_ctx_grad_checkpoint, the memory-only flags of the KF64/TK1/NOACTX runs",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "The control trained under the same conditions as KF64, TK1 and NOACTX (memory-only flags), as a same-conditions control for them and as a held-out base model for selecting inference-time changes.",
+  "test_use": "Not evaluated on test."
+}

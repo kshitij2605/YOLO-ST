@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/JHMDB-GT.pkl",
+  "config": "configs/yolost_jhmdb_jfull_split2_s17_40ep.yaml",
+  "config_sha256": "2f62448d370863ad52398e31f77c48b687f76c0f6b46b5e130005669644e6da3",
+  "gate": "plan 08 section 2.2",
+  "id": "JFULL-split2-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Training set: split-2 train minus 15% dev -> full official split-2 train (final-candidate JHMDB model)",
+  "parent": "J0-split2-s17",
+  "partition": "jhmdb-test-split2",
+  "purpose": "First JHMDB-21 test numbers for the J0 recipe: frame mAP and dense-linked video mAP with settings frozen on dev; one official evaluation per checkpoint.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 100,
+    "epochs": 40,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T17:05:46.950696Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

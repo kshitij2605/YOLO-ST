@@ -1,0 +1,43 @@
+# Phase 3A: Boundary Head + Dense Pyramid [64, 32, 16]
+# Adds action boundary prediction to best Phase 2 config
+# Tests if boundary prediction improves detection quality
+model:
+  type: phase3
+  num_classes: 24
+  target_T: [64, 32, 16]
+
+data:
+  dataset: ucf101-24
+  root: ./data/ucf24/UCF101_v2/rgb-images
+  annot_file: ./data/ucf24/UCF101_v2/UCF101v2-GT.pkl
+  clip_length: 64
+  stride: 1
+  img_size: 224
+  num_workers: 8
+
+train:
+  epochs: 50
+  batch_size: 20
+  optimizer: adamw
+  lr: 1.0e-3
+  weight_decay: 0.05
+  scheduler: cosine
+  warmup_epochs: 5
+  grad_accum: 1
+  mixed_precision: true
+  clip_grad_norm: 10.0
+
+loss:
+  lambda_cls: 0.5
+  lambda_box: 7.5
+  lambda_obj: 1.5
+  lambda_bnd: 0.5
+
+eval:
+  conf_thresh: 0.005
+  nms_iou_thresh: 0.5
+  eval_interval: 10
+
+output:
+  exp_dir: ./experiments/phase3a_boundary
+  save_interval: 10

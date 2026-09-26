@@ -1,0 +1,21 @@
+{
+  "config": "configs/yolost_v2ho_kf64_s17_30ep.yaml",
+  "config_sha256": "dd84cf3ac3aae96a256aa1e23b44ee03ca6e2e1c5306f97115ab624dd5278573",
+  "control_numbers": {
+    "confirm": {
+      "allframe_voc": 91.68,
+      "annotated_voc": 95.45,
+      "video_ap50_snap": 78.53
+    },
+    "tune": {
+      "allframe_voc": 94.46,
+      "annotated_voc": 96.37
+    }
+  },
+  "gate": "Selection among V2HO-KF64-s17 and V2HO-MR100-s17: rank by tune every-frame VOC among the variants whose tune annotated-frame VOC is >= control - 0.5; only the top-ranked variant is gated on confirm. Gate (as for V2HO-E3-s17 and the BN runs), against V2HO-HO0-s17 scored in the same pipeline: (a) every-frame VOC >= control + 1.0 on confirm and >= control + 0.5 on tune; (b) annotated-frame VOC >= control - 0.5 on both; (c) confirm video AP50 with the frozen linker and snap >= control - 2.0.",
+  "id": "V2HO-KF64-s17",
+  "one_variable": "model.keyframe_frames 16 -> 64: the frozen COCO YOLO11-L frame pyramid sees every frame of the clip instead of 16 uniformly sampled ones; everything else is the V2HO-HO0-s17 recipe, seed 17, 30 epochs",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "Five attempts on detections at action boundaries (tube gating, action-free clips, segment erosion, three boundary-negative weightings) gained at most +0.45 every-frame mAP on held-out data. The semantic stream is temporally coarse (one VideoMAE token per 4 frames); these runs feed the dense heads sharper per-frame evidence instead. Low prior odds, stated before launch.",
+  "test_use": "If the selected variant passes, its full-data model (trained in parallel: V2-WS2.0KF64 or V2-WS2.0MR100) is evaluated on split-1 test once under the frozen protocol and replaces V2-WS2.0 whatever its test result. Otherwise neither full-data model is evaluated on test."
+}

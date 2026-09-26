@@ -1,0 +1,29 @@
+{
+  "config": "configs/yolost_v2_ws1_7_backbonelr03_30ep.yaml",
+  "config_sha256": "f3d05ec69cf6c3b986c2e7e0f54a79c2866a19dbd3db65514c4fc88508133008",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.4 two-seed mean is 91.65 corrected with a measured seed spread of 0.17, so +0.5 is about three times run-to-run variation.",
+    "threshold": 92.15
+  },
+  "id": "V2-WS1.7",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "notes": "One of four experiments run concurrently, one per GPU. batch 16 with accumulation 2 keeps the effective batch at 32 so results stay comparable with the four-rank baseline.",
+  "one_variable": "backbone_lr_multiplier 0.1 -> 0.3 (backbone rate 1e-5 -> 3e-5).",
+  "parent": "scratch (same fresh lineage as V2-WS1.4)",
+  "purpose": "backbone_lr_multiplier 0.3 instead of 0.1. Separates two explanations that V2-WS1.5 alone cannot distinguish: too few trainable blocks, versus trainable blocks learning too slowly.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "effective_batch": 32,
+    "epochs": 30,
+    "grad_accum": 2,
+    "img_size": 224,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-12T01:39:19.517445Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

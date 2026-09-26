@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_f0_full_s17_6ep.yaml",
+  "config_sha256": "daaddda332ed0d4224a8ea46c8e3bec62f67ba8a1859fc8ae85042fc42544fd2",
+  "gate": "plan 08 section 2.2",
+  "id": "AVA-F0-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Training scale: 55k keyframes x 2 epochs -> all 158k dev-train keyframes x 6 epochs (memory-only loader changes)",
+  "parent": "AVA-M0-s17",
+  "partition": "ava-dev-34videos",
+  "purpose": "Revised plan 10, workstream 2: full-scale AVA baseline; the 2-epoch proxy was under-trained (loss still falling). Control for AVA-R1 and the AVA-Kinetics run.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 6,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T10:51:15.800984Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

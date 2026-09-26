@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_r0b8_224_s17_6ep.yaml",
+  "config_sha256": "c97e11819621a998ed5fb575560d5814e1a4af35d04854527dd6e04c457bcef9",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-R0b8-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Batch 16 x accum 2 -> 8 x accum 4 (effective batch 32 unchanged)",
+  "parent": "MS-R0-s17",
+  "partition": "multisports-dev-168videos",
+  "purpose": "Matched control for MS-R2: separates the per-step batch size (trainable BatchNorm) from the resolution change.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 8,
+    "epochs": 6,
+    "grad_accum": 4,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T01:34:47.188910Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

@@ -1,0 +1,22 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_ho0_s17_30ep.yaml",
+  "config_sha256": "a624a7b2ce1eb7b376e25d91a9464c4f0b569d76b6c198be52186bd8cc108b7d",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "V2HO-HO0-s17",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "one_variable": "Training set: official train -> official train minus g22-g25 (evaluation on g24/g25)",
+  "parent": "V2-WS2.0",
+  "partition": "ucf-v2ho-g24g25 (tune); confirm on ucf-v2ho-g22g23",
+  "purpose": "Held-out control for every UCF ablation; with s29 it measures sigma_HO.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-13T08:21:50.536470Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

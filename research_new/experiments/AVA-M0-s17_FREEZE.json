@@ -1,0 +1,25 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_m0_proxy_s17.yaml",
+  "config_sha256": "f496eb3ff5c2a4140412f537e870ae5d825a20b8ba276b88a30f5a4fb216fa9b",
+  "config_sha256_initial": "40b13f8a5b9a630e6f9f3f17bddd94ab3010b58a87c70eb82774fcab2ad1a12c",
+  "gate": "plan 08 section 2.2",
+  "id": "AVA-M0-s17",
+  "loader_change": "data.num_workers 8 -> 3 before any usable training (memory only)",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "AVA proxy baseline: WS2.0 dense architecture, tube queries off, centred 64x1 clips, keyframe-only cls/obj loss, official 60 classes, K400 init, 2 epochs on 55k dev-train keyframes",
+  "parent": "V2-WS2.0",
+  "partition": "ava-dev-34videos",
+  "purpose": "Plan 08 section 6.3: first valid AVA number; control for AVA-M1, AVA-R1, AVA-C5, AVA-M2.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 2,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-13T11:12:23.015415Z",
+  "train_sha256": "b3d1ae4f818c89e9a121e7492298dfc8c0c5ac94e39e11af0af896d8ddfd9937"
+}

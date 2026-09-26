@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/dev_splits/split1/jhmdb_dev_GT.pkl",
+  "config": "configs/yolost_jhmdb_j0_split1_s29_40ep.yaml",
+  "config_sha256": "69977715d955388f4a8e3886a6c4abaf7534f4a4b461ac6d545fa2ec72d46469",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "J0-split1-s29",
+  "init": null,
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "Seed 17 -> 29",
+  "parent": "J0-split1-s17",
+  "partition": "jhmdb-dev-split1",
+  "purpose": "Plan 08 JHMDB round after W2; see configs header.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 40,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 29
+  },
+  "registered_utc": "2026-09-15T00:16:15.431521Z",
+  "train_sha256": "3e5bb81eb4893745bc72a92cb2402d28fc6008a9b767e70fedcfa294c7f29b30"
+}

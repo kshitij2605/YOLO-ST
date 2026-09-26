@@ -1,0 +1,22 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_ho0_s41_30ep.yaml",
+  "config_sha256": "b5a7302781e066ed6c313e2e755c7929c680526fc8ae159d3a0173bcbfcf9ed7",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "V2HO-HO0-s41",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "Seed 17 -> 41",
+  "parent": "V2HO-HO0-s17",
+  "partition": "ucf-v2ho-g24g25 (tune); confirm on ucf-v2ho-g22g23",
+  "purpose": "Third HO0 seed: s17 and s29 differ by 1.20 frame mAP on g24/g25; two seeds cannot estimate sigma_HO.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 41
+  },
+  "registered_utc": "2026-09-14T03:49:41.989600Z",
+  "train_sha256": "3e5bb81eb4893745bc72a92cb2402d28fc6008a9b767e70fedcfa294c7f29b30"
+}

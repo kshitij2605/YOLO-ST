@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/dev_splits/split3/jhmdb_dev_GT.pkl",
+  "config": "configs/yolost_jhmdb_ji1_ucfinit_split3_s17_40ep.yaml",
+  "config_sha256": "ea532e7bd108076e502820e5b2ea0b4f19d0335f9a55ddf0c91e897011290cc3",
+  "gate": "plan 08 section 2.2",
+  "id": "JI1-split3-s17",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "Initialisation K400 VideoMAE -> UCF101-24 V2-WS2.0 EMA checkpoint (train.py --init, 24-class heads skipped by shape)",
+  "parent": "J0-split3-s17",
+  "partition": "jhmdb-dev-split3",
+  "purpose": "Plan 08 J-I1: does UCF transfer help JHMDB-21, where STAR/L overfits? Gate F +1.0 or v@0.5 +1.0 on pooled dev, 2 seeds.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 100,
+    "epochs": 40,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-14T00:29:33.249967Z",
+  "train_sha256": "3e5bb81eb4893745bc72a92cb2402d28fc6008a9b767e70fedcfa294c7f29b30"
+}

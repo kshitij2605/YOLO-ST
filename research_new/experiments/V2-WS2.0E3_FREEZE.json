@@ -1,0 +1,22 @@
+{
+  "config": "configs/yolost_v2_ws2_0e3_30ep.yaml",
+  "config_sha256": "73fff82024fb363ae5624a251c89aa716fae404ed7c64130ee75f0a60d987fea",
+  "confirm_config": "configs/yolost_v2ho_e3_s17_30ep_evalconfirm.yaml",
+  "control_numbers": {
+    "confirm": {
+      "allframe_voc": 91.69,
+      "annotated_voc": 95.45,
+      "video_ap50_snap": 78.53
+    },
+    "tune": {
+      "allframe_voc": 94.46,
+      "annotated_voc": 96.37
+    }
+  },
+  "gate": "Against V2HO-HO0-s17 scored in the same pipeline (eval_tube_queries.py with the frozen clip weighting hann_peak_norm, frame dumps scored by tools/score_frame_conventions.py, video by the frozen linker 0.45/0.6/10/16/2 with candidate filter 8 and the frozen snap 0.3/0.75/2): (a) every-frame VOC (ROAD protocol) >= control + 1.0 on confirm g22/g23 (control 91.69) and >= control + 0.5 on tune g24/g25 (control 94.46); (b) annotated-frame VOC >= control - 0.5 on both (controls 96.37 / 95.45); (c) confirm video AP50 >= control - 2.0 (control 78.53). All three must hold.",
+  "id": "V2-WS2.0E3",
+  "one_variable": "data.filter_empty_clips true -> false with data.empty_clip_repeats 3 (action-free training clips kept and repeated 3x); everything else is the V2-WS2.0 recipe, seed 17, 30 epochs",
+  "parent": "V2-WS2.0",
+  "purpose": "Detections on frames outside annotated actions cost 3.67 frame mAP when every frame is scored (test 89.54 vs 93.21). Training drops fully action-free clips (3.4% of clips). This keeps them and repeats them 3x. Held-out diagnosis before launch: 88% (tune) / 72% (confirm) of detections >= 0.5 on action-free frames lie within 32 frames of an annotated frame, and removing every such detection farther than 32 frames would raise every-frame VOC by only 0.23 / 1.08, so a large gain is not expected.",
+  "test_use": "V2-WS2.0E3 is evaluated on split-1 test once, under the frozen protocol, only if V2HO-E3-s17 passes its gate; it then replaces V2-WS2.0 as the reported UCF101-24 model whatever its test result. If the gate fails it is not evaluated on test."
+}

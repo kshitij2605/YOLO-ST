@@ -1,0 +1,30 @@
+{
+  "config": "configs/yolost_v2_ws1_1b_videomae_l_dense_bf16_30ep.yaml",
+  "config_sha256": "1794236f4eec0ddb38b93e1064ff6ed5322c443fc85327679abdee2f52d6cb33",
+  "gate": {
+    "evaluator": "moc-act",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "YOWOFormer-B parity level. v1 dense owner caps at 89.23 with VideoMAE-Base; reproduced YOWOFormer-L reaches 92.48 with VideoMAE-Large.",
+    "threshold": 91.5
+  },
+  "id": "V2-WS1.1b",
+  "model_sha256": "af697778b834a459a4bbc826c1524ef6f5d75d8d9a0bcec3e43667ad70831894",
+  "notes": "V2-WS1.1 trained cleanly for ten epochs (13.02 -> 7.58) before a single non-finite forward poisoned the BatchNorm running statistics. bfloat16 carries the float32 exponent range, so that overflow class is removed; the new abort guard stops a dead run within 25 steps instead of 8 epochs.",
+  "one_variable": "AMP autocast dtype float16 -> bfloat16. Learning rate, schedule, batch, seed and architecture are unchanged from V2-WS1.1.",
+  "parent": "scratch (fresh lineage; pretrained VideoMAE-L, frozen native (2+1)D motion from phase3a_150ep, frozen YOLO11-L keyframe)",
+  "purpose": "Rerun of V2-WS1.1 after it diverged to NaN in epoch 10 under float16 autocast. Identical in every respect except the AMP dtype, so the VideoMAE-Large question is answered without a second confound.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "ema": "decay 0.999 warmup 500",
+    "epochs": 30,
+    "lr": 0.0001,
+    "nonfinite_abort_steps": 25,
+    "seed": 17,
+    "warmup_epochs": 1.0
+  },
+  "registered_utc": "2026-09-09T05:58:52.134644Z",
+  "train_sha256": "279f3f2a86c901062fba09f905e07dbf98f9c44cd8585ccd53b03eec49679d3f"
+}

@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_a5_kf64_s17_30ep.yaml",
+  "config_sha256": "c34e29cbd99583bbeedab9ef01bdd3581576bc6814b9d7fdf40c400f01229ac8",
+  "gate": "plan 08 section 2.2",
+  "id": "V2HO-A5-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "model.keyframe_frames 16 -> 64: the frozen YOLO11-L keyframe pyramid sees every frame of the 64-frame clip instead of a strided subset of 16, chunked through keyframe_micro_batch 8. Everything else is the HO0-s17 recipe unchanged.",
+  "parent": "V2HO-HO0-s17",
+  "partition": "ucf-v2ho-g24g25",
+  "purpose": "Plan row A5. The keyframe axis rows that were run are rejected (A1a -0.12 over two seeds, A1b catastrophic at 62.84), but A5 was never run and needs no code. UCF frame mAP is our thinnest margin: 93.21 corrected / 93.32 YOWO against YOWOFormer-L 93.35. Gate: +0.5 corrected frame or +0.8 AP50:95 against HO0-s17 (95.71 on g24/g25).",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-16T14:27:08.135307Z",
+  "train_sha256": "a7482e94e886fded5029a5d11512fc84c0ce2ab8af71764c4e0f46b593b4f8a4"
+}

@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_r2_288x512_s17_6ep.yaml",
+  "config_sha256": "118934b14506246f5fd8dda160361fae38a6cc8dd307d6f9f0363d610665b060",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-R2-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Input 224x224 -> 288x512 (patch 0017; memory-only checkpointing of VideoMAE and class-context refiners)",
+  "parent": "MS-R0b8-s17",
+  "partition": "multisports-dev-168videos",
+  "purpose": "Plan 08 MS-R2: resolution for MultiSports. Gate: official MS-dev frame AP +1.5 and dense-link video AP@0.5 +1.5 over MS-R0b8.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 8,
+    "epochs": 6,
+    "grad_accum": 4,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T01:34:47.353125Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

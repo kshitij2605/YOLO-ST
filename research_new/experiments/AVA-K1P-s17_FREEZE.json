@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT.pkl",
+  "config": "configs/yolost_ava_k1_proxy_s17.yaml",
+  "config_sha256": "d1de71f5e3978c6ad8ca2f5eb81ba6804f305af1d797e11e59166fb23e714d4d",
+  "gate": "plan 08 section 2.2",
+  "id": "AVA-K1P-s17",
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Training data: 55k AVA dev-train keyframes -> the same plus 55k AVA-Kinetics keyframes (2 epochs each; uint8 clips memory-only)",
+  "parent": "AVA-M0-s17",
+  "partition": "ava-dev-34videos",
+  "purpose": "Revised plan 10 workstream 2: first AVA-Kinetics signal on the proxy scale before the full AVA-K run. Gate +1.5 AVA-dev mAP.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 500,
+    "epochs": 2,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T17:12:03.415166Z",
+  "train_sha256": "a7482e94e886fded5029a5d11512fc84c0ce2ab8af71764c4e0f46b593b4f8a4"
+}

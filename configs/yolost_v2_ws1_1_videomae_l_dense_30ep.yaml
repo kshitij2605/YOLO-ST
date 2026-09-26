@@ -1,0 +1,116 @@
+# V2-WS1.1: VideoMAE-Large dense frame owner, UCF101-24, 30 epochs, 4x H100 DDP.
+# Two optimiser steps only. Validates construction, DDP-free forward/backward,
+# memory, and step time before the full run is launched.
+#
+# Identical to yolost_v2_ws1_1_videomae_l_dense_20ep.yaml except for
+
+model:
+  type: videomae
+  model_id: MCG-NJU/videomae-large-finetuned-kinetics
+  num_classes: 24
+  dtype: float32
+  freeze_backbone: false
+  unfreeze_last_n_blocks: 8
+  backbone_frames: 32
+  backbone_frame_sampling: uniform
+
+  # Dense frame owner only. The tube-query decoder is deliberately off so this
+  # experiment measures the dense pathway in isolation, which is where the
+  # 4.9-point frame-mAP gap to YOWOFormer-L lives.
+  apt_tube_queries: false
+
+  # APT context stack, unchanged from the v1 promoted lineage.
+  temporal_adapter: true
+  temporal_adapter_depth: 2
+  temporal_adapter_kernel: 5
+  temporal_adapter_expansion: 2
+  temporal_adapter_dropout: 0.05
+  apt_pyramid_adapter: true
+  apt_adapter_depth: 1
+  apt_adapter_kernel: 3
+  apt_adapter_temporal_kernel: 3
+  apt_adapter_dropout: 0.05
+  apt_context_gate: true
+  apt_context_dim: 128
+  apt_context_dropout: 0.05
+  apt_actor_context: true
+  apt_actor_context_dim: 128
+  apt_actor_context_heads: 4
+  apt_actor_context_depth: 2
+  apt_actor_context_slots: 1
+  apt_actor_context_dropout: 0.05
+  apt_class_context: true
+  apt_class_context_dim: 128
+  apt_class_context_dropout: 0.05
+  apt_cross_clip_memory: true
+  apt_cross_clip_memory_dim: 128
+  apt_cross_clip_memory_chunk: 8
+  apt_cross_clip_memory_bidirectional: true
+  apt_cross_clip_memory_dropout: 0.05
+
+  # Native (2+1)D actor-local motion, frozen. Matched attribution in v1:
+  # +1.17 frame / +2.23 strict AP.
+  native_motion_pyramid: true
+  native_motion_init: ./experiments/phase3a_150ep/final.pt
+  native_motion_freeze: true
+  native_motion_actor_local: true
+  native_motion_actor_floor: 0.1
+  native_motion_channel_ratio: 0.25
+
+  # Frozen YOLO11-L keyframe pyramid, all three scales.
+  keyframe_pyramid: true
+  keyframe_version: l
+  keyframe_pretrained_path: ./pretrained/yolo11l.pt
+  keyframe_scales: [true, true, true]
+  keyframe_frames: 16
+  keyframe_freeze: true
+  keyframe_micro_batch: 8
+
+data:
+  dataset: ucf101-24
+  root: ./data/ucf24/UCF101_v2/rgb-images
+  annot_file: ./data/ucf24/UCF101_v2/UCF101v2-GT.pkl
+  clip_length: 64
+  stride: 1
+  img_size: 224
+  num_workers: 8
+  filter_empty_clips: true
+
+train:
+  batch_size: 8
+  grad_accum: 1
+  backward_loss_divisor: 1
+  optimizer: adamw
+  # Fresh lineage: the neck, dense head and adapters are randomly initialised
+  # and need a real learning rate, while the pretrained VideoMAE-Large encoder
+  # needs a much smaller one. v1 never had to separate these because every
+  # stage was a continuation from a trained parent at a single global 2e-6.
+  lr: 1.0e-04
+  backbone_lr_multiplier: 0.1
+  keyframe_lr_multiplier: 1.0
+  motion_fusion_lr_multiplier: 1.0
+  weight_decay: 0.05
+  scheduler: cosine
+  warmup_epochs: 1.0
+  epochs: 30
+  clip_grad_norm: 1.0
+  mixed_precision: true
+  seed: 17
+  ema: true
+  ema_decay: 0.999
+  ema_warmup: 500
+
+loss:
+  lambda_box: 7.5
+  lambda_cls: 0.5
+  lambda_obj: 1.5
+  lambda_bnd: 0.0
+  lambda_memory: 0.05
+
+eval:
+  conf_thresh: 0.005
+  nms_iou_thresh: 0.5
+
+output:
+  exp_dir: ./experiments/v2_ws1_1_videomae_l_dense_30ep
+  save_interval: 5

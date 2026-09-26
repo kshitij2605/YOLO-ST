@@ -1,0 +1,13 @@
+{
+  "config": "configs/yolost_v2ho_ho0gc_s17_30ep.yaml",
+  "config_sha256": "71487513e4f5b1d9db4bdb7dd5d78b41eaa56dc742415cec56d28fa918658b30",
+  "gate": "Fresh check on V2HO-HO0GC-s17, whose views did not exist when this was written: its plain and --hflip evaluations (research_new/experiments/FLIPTTA_RESULT/V2HO-HO0GC-s17) fused with --tube-frames top against its plain evaluation, frozen snap. PASS if on both tune and confirm video AP20, AP50 and AP50:95 each change by >= -0.20. The same fusion with the union rule is reported next to it.",
+  "id": "V2HO-TUBEFUSE2",
+  "one_variable": "tube fusion rule: a fused tube keeps only the frames of its highest-scoring member (--tube-frames top) instead of every frame any member covers (union, the rule of V2HO-FLIPTTA and the exploratory ensemble); boxes are still score-weighted over the members that have the frame, scores averaged over all views.",
+  "parent": "V2HO-FLIPTTA",
+  "purpose": "Flip TTA and the exploratory 3-model ensemble both lost ~2.3-2.5 video AP50 on tune while frame mAP rose. The union rule lengthens fused tubes, which lowers temporal overlap; keeping the top member's extent should remove that loss. Motivated by those results, so it is checked only on data they did not touch.",
+  "test_use": "On a pass the top rule is the tube fusion of V2-ENS5 (as its registration states); otherwise the ensemble's video numbers stay V2-WS2.0's single-model ones. No test evaluation of its own.",
+  "tools": {
+    "tools/fuse_model_views.py": "f703c3af4d53992bef27ac05c34f6b9c3c8d1ad709b7daf1d755ec23609deffa"
+  }
+}

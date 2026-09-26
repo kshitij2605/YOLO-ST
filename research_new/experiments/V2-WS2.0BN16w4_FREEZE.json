@@ -1,0 +1,10 @@
+{
+  "config": "configs/yolost_v2_ws2_0bn16w4_30ep.yaml",
+  "config_sha256": "b2ff27bf9445a6983df6eedf53db6f426444f55cc481a82138a658ac643e4375",
+  "gate": "Selection among V2HO-BN16w4-s17, V2HO-BN8w8-s17 and V2HO-BN32w4-s17: rank by tune every-frame VOC among the variants whose tune annotated-frame VOC is >= control - 0.5; only the top-ranked variant is gated on confirm. Gate (same as V2HO-E3-s17), against V2HO-HO0-s17 scored in the same pipeline: (a) every-frame VOC >= control + 1.0 on confirm and >= control + 0.5 on tune; (b) annotated-frame VOC >= control - 0.5 on both; (c) confirm video AP50 with the frozen linker and snap >= control - 2.0.",
+  "id": "V2-WS2.0BN16w4",
+  "one_variable": "data.boundary_negative_window 0 -> 16 and data.boundary_negative_weight 1 -> 4 (patch 0031); everything else is the V2-WS2.0 recipe, seed 17, 30 epochs",
+  "parent": "V2-WS2.0",
+  "purpose": "Confident detections on action-free frames sit mostly near annotated actions (held-out tune: 48%% within 8 frames, 88%% within 32); those frames are already negatives but carry little loss. Up-weighting them targets the every-frame (ROAD/BMViT) protocol gap of 3.67 points on test. E3 (keeping action-free clips) failed its gate.",
+  "test_use": "If V2HO-BN16w4-s17 is selected and passes, V2-WS2.0BN16w4 (trained in parallel) is evaluated on split-1 test once under the frozen protocol and replaces V2-WS2.0 whatever its test result. If another variant is selected and passes, its full-data model is trained afterwards and evaluated once. If the selected variant fails, no BN model is evaluated on test."
+}

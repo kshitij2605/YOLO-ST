@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_r2e12_288x512_s17_12ep.yaml",
+  "config_sha256": "93496e1b9a4c06f4bf01762506c45bbb1564da2d02425caedd6d50704f7f2097",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-R2E12-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Epochs 6 -> 12 at 288x512 (both promoted levers together)",
+  "parent": "MS-R2-s17",
+  "partition": "multisports-dev-168videos",
+  "purpose": "Revised plan 10 workstream 3: the MultiSports recipe combining the two promoted levers. Gate: official MS-dev frame AP +1.0 over MS-R2 and over MS-E12.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 8,
+    "epochs": 12,
+    "grad_accum": 4,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-17T04:52:33.369473Z",
+  "train_sha256": "f13f28b98cfa25fcbf2a83a64018908eaa8b3a122fef91966e96f180dcadbf5c"
+}

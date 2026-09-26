@@ -1,0 +1,218 @@
+{
+  "dataset": "ava",
+  "fraction": 0.1,
+  "num_classes_seen": 80,
+  "num_dev_videos": 34,
+  "num_source_train_videos": 235,
+  "num_train_videos": 201,
+  "per_class": {
+    "13": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "15": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "16": {
+      "dev": 1,
+      "total": 4,
+      "train": 3
+    },
+    "18": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "19": {
+      "dev": 1,
+      "total": 5,
+      "train": 4
+    },
+    "2": {
+      "dev": 1,
+      "total": 12,
+      "train": 11
+    },
+    "21": {
+      "dev": 1,
+      "total": 11,
+      "train": 10
+    },
+    "23": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "24": {
+      "dev": 1,
+      "total": 9,
+      "train": 8
+    },
+    "25": {
+      "dev": 1,
+      "total": 3,
+      "train": 2
+    },
+    "28": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "31": {
+      "dev": 1,
+      "total": 9,
+      "train": 8
+    },
+    "32": {
+      "dev": 1,
+      "total": 6,
+      "train": 5
+    },
+    "33": {
+      "dev": 1,
+      "total": 5,
+      "train": 4
+    },
+    "34": {
+      "dev": 1,
+      "total": 3,
+      "train": 2
+    },
+    "35": {
+      "dev": 1,
+      "total": 9,
+      "train": 8
+    },
+    "37": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "39": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "4": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "40": {
+      "dev": 1,
+      "total": 9,
+      "train": 8
+    },
+    "41": {
+      "dev": 1,
+      "total": 4,
+      "train": 3
+    },
+    "42": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "43": {
+      "dev": 1,
+      "total": 7,
+      "train": 6
+    },
+    "44": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "5": {
+      "dev": 1,
+      "total": 3,
+      "train": 2
+    },
+    "50": {
+      "dev": 1,
+      "total": 6,
+      "train": 5
+    },
+    "51": {
+      "dev": 1,
+      "total": 4,
+      "train": 3
+    },
+    "52": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "53": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "55": {
+      "dev": 1,
+      "total": 9,
+      "train": 8
+    },
+    "56": {
+      "dev": 1,
+      "total": 10,
+      "train": 9
+    },
+    "57": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "60": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "62": {
+      "dev": 1,
+      "total": 6,
+      "train": 5
+    },
+    "68": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "7": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "71": {
+      "dev": 1,
+      "total": 8,
+      "train": 7
+    },
+    "72": {
+      "dev": 0,
+      "total": 1,
+      "train": 1
+    },
+    "73": {
+      "dev": 1,
+      "total": 2,
+      "train": 1
+    },
+    "75": {
+      "dev": 1,
+      "total": 6,
+      "train": 5
+    },
+    "9": {
+      "dev": 1,
+      "total": 3,
+      "train": 2
+    }
+  },
+  "seed": "yolost-v2-dev-split-v1",
+  "source_annotation": "data/ava/annotations/ava_train_v2.2.csv",
+  "source_sha256": "178ea776b641da36a542252cb3a140db713063356f000072f897680a78c1d65e"
+}

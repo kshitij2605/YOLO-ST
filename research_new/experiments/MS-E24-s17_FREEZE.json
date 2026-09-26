@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_e24_224_s17_24ep.yaml",
+  "config_sha256": "e62bc074f56c1bb1630c55e89dd463e311bc9eda70b7a43f6d6824f82f75e9e8",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-E24-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Epochs 12 -> 24 (cosine schedule rescaled)",
+  "parent": "MS-E12-s17",
+  "partition": "multisports-dev-168videos",
+  "purpose": "12 epochs gave +6.9 frame AP over 6; find where MultiSports training saturates before the final high-resolution recipe. Gate: official MS-dev frame AP +1.0.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 24,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T17:02:22.578024Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

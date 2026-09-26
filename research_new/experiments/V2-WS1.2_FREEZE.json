@@ -1,0 +1,30 @@
+{
+  "config": "configs/yolost_v2_ws1_2_posemb_regenerate_30ep.yaml",
+  "config_sha256": "278ef6b41468288e54c15e5e71c892e3287e61cfad1e1e1e268955dbf7c3f224",
+  "gate": {
+    "evaluator": "moc-act-corrected-frame",
+    "metric": "frame",
+    "partition": "ucf-test",
+    "rationale": "V2-WS1.1b scored 90.54 corrected. The gate is +0.5, the smallest change worth carrying forward given run-to-run variation has not yet been measured on this lineage.",
+    "threshold": 91.04
+  },
+  "id": "V2-WS1.2",
+  "model_sha256": "7061be05ba9f3f5c4b8d92d145033a54337b27c573f7b760ae0b46f52d991dce",
+  "notes": "Patch research_new/patches/0005_position_embedding_regenerate.py adds model.position_embedding_mode, defaulting to interpolate so every prior config reproduces. tests/test_position_embedding_mode.py pins both behaviours and the measured norm loss.",
+  "one_variable": "VideoMAE position embedding resize: trilinear interpolation -> exact analytic regeneration. Backbone, learning rate, schedule, batch, seed and AMP dtype unchanged from V2-WS1.1b.",
+  "parent": "scratch (same fresh lineage as V2-WS1.1b)",
+  "purpose": "VideoMAE stores a fixed analytic sinusoid position table whose every token has norm exactly sqrt(hidden/2). Resizing it from 16 to 32 frames by trilinear interpolation averages neighbouring rows out of phase and costs about 11 percent of that norm, measured at 0.888 for Base and 0.889 for Large. Evaluating the closed form at the required length is exact. This tests whether that degraded position signal was costing frame mAP.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "backbone_lr_multiplier": 0.1,
+    "effective_batch": 32,
+    "ema": "decay 0.999 warmup 500",
+    "epochs": 30,
+    "lr": 0.0001,
+    "position_embedding_mode": "regenerate",
+    "seed": 17,
+    "warmup_epochs": 1.0
+  },
+  "registered_utc": "2026-09-09T15:20:36.914901Z",
+  "train_sha256": "315da4c52143b0d1d52cda436c30686648ce05f2d0cd96778b7a1b83014df62e"
+}

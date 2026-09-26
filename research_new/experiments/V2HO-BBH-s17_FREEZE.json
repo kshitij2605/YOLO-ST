@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/UCF101_v2/UCF101v2-GT-v2ho-tune-g24g25.pkl",
+  "config": "configs/yolost_v2ho_bbh_videomaeh_s17_30ep.yaml",
+  "config_sha256": "78a9465f83dc4de9b0a92cd6ca7a705e62a17a886e82171039f281442288649e",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "V2HO-BBH-s17",
+  "init": null,
+  "model_sha256": "971c3d95c7fbc827e66c46ca68b563e1788af6c65630757d0ccad1ee304eeec3",
+  "one_variable": "Backbone VideoMAE-L -> VideoMAE-H (K400 fine-tuned; last 8 of 32 blocks trainable)",
+  "parent": "V2HO-HO0-s17",
+  "partition": "ucf-v2ho-g24g25 (tune); confirm on ucf-v2ho-g22g23",
+  "purpose": "Revised plan 10, workstream 1: backbone capacity. Single-seed screen vs the HO0 three-seed mean 95.06 (sd 0.61); a second seed only if it clears the gate.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 30,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T10:59:53.194120Z",
+  "train_sha256": "e324983a58cc502d7b2a7b9cf418ce5d558c2b8051788758fd9aecec87c1b1a7"
+}

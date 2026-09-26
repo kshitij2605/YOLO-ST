@@ -1,0 +1,29 @@
+{
+  "config": "configs/yolost_v2_ws2_0_tubequeries_30ep.yaml",
+  "config_sha256": "fcc80c3248fa1c1512e5edf42d93c695845246e7f32eb367ada573aeccf58404",
+  "gate": {
+    "evaluator": "moc-act",
+    "metric": "ap50",
+    "partition": "ucf-test",
+    "rationale": "v1 best single model reached 71.22 AP50. Matching it on the fresh lineage is the bar for the tube branch being usable.",
+    "threshold": 71.22
+  },
+  "id": "V2-WS2.0",
+  "model_sha256": "61058aa88dd9f0b2bf4456489b59c67b0dc169632d9e50aabdb7d96d50897948",
+  "notes": "One of four experiments run concurrently, one per GPU. batch 16 with accumulation 2 keeps the effective batch at 32 so results stay comparable with the four-rank baseline.",
+  "one_variable": "Tube-query decoder off -> on, with the v1 query stack and loss weights. Learning-rate multipliers deliberately set to 1.0 rather than the v1 value of 20, which was tuned against a base rate of 2e-6 and at our 1e-4 would be 2e-3.",
+  "parent": "scratch (same fresh lineage as V2-WS1.4)",
+  "purpose": "Enable the tube-query decoder on the promoted distribution-head dense owner. All of WS1 ran with the tube branch off and therefore has no video metrics at all, yet AP20/AP50/AP50:95 are the actual SOTA targets. This establishes the video baseline every WS2 mechanism will be measured against.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "effective_batch": 32,
+    "epochs": 30,
+    "grad_accum": 2,
+    "img_size": 224,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-12T01:39:19.381170Z",
+  "train_sha256": "49a71788054084b123e25456ab89242f32eddec2dba57e6acc4fbd20db0a1957"
+}

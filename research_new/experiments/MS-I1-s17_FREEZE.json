@@ -1,0 +1,24 @@
+{
+  "annot_file": "./data/multisports/dev_splits/multisports_dev_GT.pkl",
+  "config": "configs/yolost_ms_i1_ucfinit_224_s17_6ep.yaml",
+  "config_sha256": "49c333f0bd0e9a62a46369c243de34f5a9ca056327088f0f39090adc2807928e",
+  "first_launch_note": "first launch ran without --init (launcher bug); stopped and relaunched with init",
+  "gate": "plan 08 section 2.2: two-seed mean >= control mean + max(0.5, 3 sigma_HO)",
+  "id": "MS-I1-s17",
+  "init": "experiments/v2_ws2_0_tubequeries_30ep/ema_final.pt",
+  "model_sha256": "d3781fa1dea1f041634b01bd0e5bade001ae9d5b7fb129fc182620f98aa63153",
+  "one_variable": "Initialisation K400 VideoMAE -> UCF101-24 V2-WS2.0 EMA (train.py --init; 24-class heads skipped by shape)",
+  "parent": "MS-R0-s17",
+  "partition": "multisports-dev-168videos",
+  "purpose": "Plan 08 MS-I1: does UCF transfer help MultiSports? Gate frame AP +1.0 on MS-dev.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "epochs": 6,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-15T00:12:27.711291Z",
+  "train_sha256": "3e5bb81eb4893745bc72a92cb2402d28fc6008a9b767e70fedcfa294c7f29b30"
+}

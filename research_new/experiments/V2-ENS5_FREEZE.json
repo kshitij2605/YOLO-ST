@@ -1,0 +1,13 @@
+{
+  "config": "configs/yolost_v2_ws2_0_tubequeries_30ep.yaml",
+  "config_sha256": "fcc80c3248fa1c1512e5edf42d93c695845246e7f32eb367ada573aeccf58404",
+  "gate": "No held-out gate beyond the exploratory evidence; membership and fusion rule fixed before any test run.",
+  "id": "V2-ENS5",
+  "one_variable": "prediction-level ensemble with fixed membership: V2-WS2.0, V2HO-HO0GC-s17, V2HO-KF64-s17, V2HO-TK1-s17 and V2HO-NOACTX-s17 (every UCF101-24 model of this recipe family available on 2026-09-26; the four V2HO models were trained without groups 22-25). Each is evaluated once on split-1 test with the frozen protocol; frame detections are fused by tools/fuse_model_views.py (scores averaged over the five, a missing model counting 0; boxes score-weighted; IoU 0.55; NMS 0.5). Video: tubes fused with the rule chosen by V2HO-TUBEFUSE2 if it passes its check, else the video numbers stay V2-WS2.0's.",
+  "parent": "V2-WS2.0",
+  "purpose": "Exploratory held-out evidence (2026-09-26, three models, disclosed): fusing KF64, TK1 and NOACTX raised annotated-frame VOC by +0.37 and every-frame VOC by +0.40-0.44 over their mean on both tune and confirm. No member is chosen by any test result.",
+  "test_use": "Evaluated on split-1 test once; reported as a separate 'ensemble of 5' row. The single-model numbers stay the headline. The four V2HO members were registered with no test use; this separate use is disclosed in their notes and in the paper.",
+  "tools": {
+    "tools/fuse_model_views.py": "b8fa7bfd0a5d0ca5442ff7cf93f74a87c61bd8e6e04fbb52c5d48fdd8012f66b"
+  }
+}

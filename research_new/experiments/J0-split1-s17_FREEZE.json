@@ -1,0 +1,23 @@
+{
+  "annot_file": "./data/ucf24/JHMDB/dev_splits/split1/jhmdb_dev_GT.pkl",
+  "config": "configs/yolost_jhmdb_j0_split1_s17_40ep.yaml",
+  "config_sha256": "f099162c67447ac22c6922723cf22ac4b1b5ee06fd4ae984c9002311b03e86e2",
+  "gate": "plan 08 section 2.2",
+  "id": "J0-split1-s17",
+  "model_sha256": "e2895eced7f9001d13741cc0c7f97b948a2e3039472a5b2c0f49d1d4af32f0d3",
+  "one_variable": "JHMDB-21 baseline J0: WS2.0 architecture, K400 init, whole-video clip 40, 40 epochs, EMA warmup 100, trained on split train minus 15% dev",
+  "parent": "V2-WS2.0",
+  "partition": "jhmdb-dev-split1",
+  "purpose": "Plan 08 section 6.2: first JHMDB-21 result; control for J-H1, J-I1, J-F1, J-C1, J-E1.",
+  "recipe": {
+    "amp_dtype": "bfloat16",
+    "batch_size": 16,
+    "ema_warmup": 100,
+    "epochs": 40,
+    "grad_accum": 2,
+    "lr": 0.0001,
+    "seed": 17
+  },
+  "registered_utc": "2026-09-13T09:30:07.804972Z",
+  "train_sha256": "9dd5ee699fb3ab6bfe7dfb1637129c1cc675408d76d3ddee3c8d10e6db58a77f"
+}

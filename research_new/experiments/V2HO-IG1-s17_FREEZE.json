@@ -1,0 +1,45 @@
+{
+  "config": "configs/yolost_v2ho_ho0_s17_30ep.yaml",
+  "config_sha256": "a624a7b2ce1eb7b376e25d91a9464c4f0b569d76b6c198be52186bd8cc108b7d",
+  "gate": {
+    "evaluator": "road-allframe-voc-hann_peak_norm",
+    "metric": "frame",
+    "partition": "ucf-v2ho-g22g23",
+    "rule": "Promote only if (a) HO0-s17 confirm: all-frame VOC >= ungated + 1.0 and annotated-frame VOC >= ungated - 0.5, and (b) HO0-s29 tune and confirm: all-frame VOC >= ungated + 0.5 on both."
+  },
+  "grid": {
+    "delta": [
+      0,
+      4,
+      8,
+      16,
+      32
+    ],
+    "eps": [
+      0.0,
+      0.1,
+      0.3
+    ],
+    "mode": [
+      "any",
+      "cls"
+    ],
+    "tau": [
+      0.0,
+      0.01,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ]
+  },
+  "id": "V2HO-IG1-s17",
+  "one_variable": "Inference-time frame gating (model weights unchanged): a dense frame detection keeps its score only if a linked tube (frozen linker 0.45/0.6/10/16/2) with score >= tau covers its frame, the tube extent dilated by delta frames; otherwise its score is multiplied by eps (eps 0 removes it). Coverage from tubes of any class (mode any) or of the detection's class (mode cls).",
+  "parent": "V2HO-HO0-s17",
+  "purpose": "Audit 2026-09-24: under the all-frame frame-mAP protocol (ROAD test-ucf24.py full_test=True, cited by BMViT) the reported checkpoint scores 89.54 against 93.21 on annotated frames only, because the dense head fires on frames outside every action. Tube queries own temporal extent; IG1 transfers it to the dense head, the converse of the frozen B2 geometry snap.",
+  "registered_utc": "2026-09-24T00:30:41.029308Z",
+  "selection": "Tune = ucf-v2ho-g24g25: HO0-s17 ema_final all-frame dump (research_new/experiments/B_DENSELINK_HO0S17/frames_tune_ema.pkl) and tube cache (V2HO-HO0-s17_RESULT/tube_cache_v2ho-tune-g24g25_ema.pkl, candidate min_length 8). Maximize all-frame VOC frame mAP subject to annotated-frame VOC >= ungated - 0.5; settings within 0.05 of the best tie, broken toward eps 0, mode any, smaller delta, smaller tau.",
+  "test_use": "If promoted: frozen, then applied once to the corrected test runs (candidate min_length 8) of V2-WS2.0, V2HO-HO0-s17/s29/s41 and V2HO-M1-s17, reported with and without the gate under annotated-VOC, all-frame VOC and all-frame MOC conventions.",
+  "tool": "tools/gate_frames_by_tube_extent.py",
+  "tool_sha256": "1b2715bba7d12933222762e2df59fcd18ecab11d975a5872852229e86fb63368"
+}
